@@ -171,3 +171,10 @@ def home(request):
 ```python
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
 ```
+
+6. For images, movies specify a MEDIA_URS in settings.py
+
+```python
+MEDIA_URL = '/img/'
+
+```
