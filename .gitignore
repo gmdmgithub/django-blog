@@ -1,3 +1,4 @@
 .vscode/
 *.xlsx
+crm/db.sqlite3
 __pycache__/

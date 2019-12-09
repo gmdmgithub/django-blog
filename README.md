@@ -172,9 +172,17 @@ def home(request):
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
 ```
 
-6. For images, movies specify a MEDIA_URS in settings.py
+6. For images, movies specify a MEDIA_URS in `settings.py`
 
 ```python
 MEDIA_URL = '/img/'
 
 ```
+
+## DATABASE
+
+1. Database configuration is placed in `settings.py` file - by default sqlite is defined (look for DATABASES)
+
+2. Run the migration - `$ python manage.py migrate`
+
+3. Create user - because of sqlite we use `$ python manage.py createsuperuser`
