@@ -11,7 +11,7 @@ def contact(request):
     return HttpResponse('Contact us!')
 
 def products(request):
-    return HttpResponse('Our products are here')
+    return render(request,'accounts/products.html')
 
 def accounts(request):
-    return HttpResponse('Customer accounts management')
+    return render(request,'accounts/customers.html')

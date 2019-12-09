@@ -115,3 +115,7 @@ urlpatterns = [
 def home(request):
     return render(request,'accounts/dashboard.html')
 ```
+
+### Templates inheritance
+
+1. Create a main template (or as many as U need) in templates/[APP_NAME]
