@@ -89,6 +89,29 @@ urlpatterns = [
 ]
 ```
 
+5. Modify origin `urls.py` from main directory - use include
+
+```python
+#....
+from django.urls import path, include
+
+#....
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+    path('', include('accounts.urls')), # whenever '/' look for accounts.url
+]
+```
+
 ## Using templates
 
+1. In [APP_NAME] create folder called `templates` and sub-folder [APP_NAME] `accounts` - be carefull - django is looking for such a structure
 
+2. Inside create a template page eg `index.html`
+
+3. Instead, returning HtmlResponse render function from diango.shorcuts is provided om file `views.py`
+
+```python
+def home(request):
+    return render(request,'accounts/dashboard.html')
+```
