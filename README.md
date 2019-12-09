@@ -56,7 +56,7 @@ urlpatterns = [
 
 ```
 
-4. Ordinary way:
+4. Ordinary way without templates
 
 - go to [APP_NAME] and to the file views.py
 
@@ -79,8 +79,7 @@ def accounts(request):
 - create in [APP_NAME] file `urls.py` - all urls related to app should be transferred/managed here and add urls
 
 ```python
-
-from accounts import views
+from . import views
 
 urlpatterns = [
     path('', views.home),
@@ -89,3 +88,7 @@ urlpatterns = [
     path('customers/', views.accounts),
 ]
 ```
+
+## Using templates
+
+
