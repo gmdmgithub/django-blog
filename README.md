@@ -119,3 +119,55 @@ def home(request):
 ### Templates inheritance
 
 1. Create a main template (or as many as U need) in templates/[APP_NAME]
+
+2. Create a block in the template (lets assume main one)
+
+```html
+<body>
+    {% include "accounts/navbar.html" %}
+    {% block content %}
+    {% endblock content %}
+</body>
+```
+
+3. In corresponding files extend the main template
+
+```html
+{% extends "accounts/index.html" %}
+{% block content %}
+<h1>Products will be here</h1>
+{% endblock content %}
+```
+
+4. The same way it could be included another block - create page and nclude tag
+
+```django
+{% include "accounts/navbar.html" %}
+```
+
+### Static files
+
+1. Create folder and sub-folders (up to U)
+
+2. Add files like main.css, main.js etc
+
+3. Configure django - settings.py, add STATICFILES_DIRS - BASE_DIR is specify in the file
+
+```python
+ STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, 'static')
+ ]
+
+```
+
+4. Add load static into the file you want to use it
+
+```phyton
+{% load static %}
+```
+
+5. Use load from staic in the place in needed - key word is `{% static '' %}`
+
+```python
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+```

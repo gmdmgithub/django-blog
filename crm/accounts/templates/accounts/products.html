@@ -1,13 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>products</title>
-</head>
-<body>
+{% extends "accounts/index.html" %}
+
+{% block content %}
+
+<br>
+
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<h5>Products</h5>
+				</div>
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+							<th>Product</th>
+							<th>Category</th>
+							<th>Price</th>
+						</tr>
+						
+					</table>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}
+
     
-    <h1>Products will be here</h1>
-</body>
-</html>

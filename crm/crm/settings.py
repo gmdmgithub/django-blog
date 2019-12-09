@@ -11,9 +11,28 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+logger = logging.getLogger(__name__)
 
 
 # Quick-start development settings - unsuitable for production
@@ -119,3 +138,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+logging.info(f'Static dir is {STATICFILES_DIRS}')
+logging.info(f'Base dir is: {BASE_DIR}')
