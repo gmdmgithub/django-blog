@@ -37,3 +37,55 @@
 - `views.py` - view files to create user interface
 
 2. Go to `settings.py` and add in section `INSTALLED_APPS` and add the app [APP_NAME] to the list
+
+3. Add new view to the project - simple way:
+
+- go to the file urls.py:
+
+```python
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse('Welcome to the home page')
+
+# for start simply add urls to the urlpatterns
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', home),
+]
+
+```
+
+4. Ordinary way:
+
+- go to [APP_NAME] and to the file views.py
+
+```python
+from django.http import HttpResponse
+def home(request):
+    return HttpResponse('Welcome to the home page')
+
+def contact(request):
+    return HttpResponse('Contact us!')
+
+def products(request):
+    return HttpResponse('Our products are here')
+
+def accounts(request):
+    return HttpResponse('Customer accounts management')
+
+```
+
+- create in [APP_NAME] file `urls.py` - all urls related to app should be transferred/managed here and add urls
+
+```python
+
+from accounts import views
+
+urlpatterns = [
+    path('', views.home),
+    path('about/', views.contact),
+    path('products/', views.products),
+    path('customers/', views.accounts),
+]
+```
