@@ -201,4 +201,14 @@ class Customer(models.Model):
 
 ```
 
+3. Once creating to effect the system run: `$ python manage.py makemigrations` and then `$ python manage.py migrate` - this second add this to the database
 
+4. What does this for us - create folder migrations (if it was not previously) and with additional files with pattern `0001_initial.py`
+
+5. To expose it to the admin panel go to `admin.py` eg:
+
+```python
+from .models import Customer
+admin.site.register(Customer)
+
+```
