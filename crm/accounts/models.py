@@ -17,9 +17,14 @@ class Customer(models.Model):
     def __unicode__(self):
         return None
 class Product(models.Model):
+    CATEGORY = (
+        ('CAT1', 'Windows'),
+        ('CAT2', 'Doors'),
+        ('CAT3', 'Walls'),
+    )
     name = models.CharField(max_length=200)
     price = models.FloatField()
-    category = models.CharField(max_length=20, null=True)
+    category = models.CharField(max_length=20, null=True, choices=CATEGORY)
     description = models.CharField(max_length=4000, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
