@@ -1,5 +1,7 @@
 from django.db import models
 
+import uuid
+
 # Create your models here.
 
 class Customer(models.Model):
@@ -14,3 +16,35 @@ class Customer(models.Model):
 
     def __unicode__(self):
         return None
+class Product(models.Model):
+    name = models.CharField(max_length=200)
+    price = models.FloatField()
+    category = models.CharField(max_length=20, null=True)
+    description = models.CharField(max_length=4000, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Product name: {self.name}'
+
+    def __unicode__(self):
+        return f'Product name: {self.name}'
+
+class Order(models.Model):
+    # customer =
+    # product=
+    STATUS = (
+        ('PENDING', 'Pending'),
+        ('UNDER_DELIVERY','Out in delivery'),
+        ('DELIVERED', 'Delivered to the customer')
+    )
+
+    number = models.CharField(max_length=200)
+    date_created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, null=True, choices=STATUS)
+
+
+    def __str__(self):
+        return f'Order: {self.number}'
+
+    def __unicode__(self):
+        return f'Order: {self.number}'
