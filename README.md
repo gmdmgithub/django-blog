@@ -183,6 +183,22 @@ MEDIA_URL = '/img/'
 
 1. Database configuration is placed in `settings.py` file - by default sqlite is defined (look for DATABASES)
 
-2. Run the migration - `$ python manage.py migrate`
+2. Run the migration to create DB - `$ python manage.py migrate`
 
 3. Create user - because of sqlite we use `$ python manage.py createsuperuser`
+
+
+### Model concept
+
+1. Models of data are placed in the file models.py
+
+2. Define `Class`es that inherent from `django.Models` - eg
+
+```python
+class Customer(models.Model):
+    """ Model representing Customer """
+    name = models.CharField(max_length=200)
+
+```
+
+
