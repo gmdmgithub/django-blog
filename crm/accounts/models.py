@@ -15,7 +15,18 @@ class Customer(models.Model):
         return f'Customer: {self.name}'
 
     def __unicode__(self):
-        return None
+        return f'Customer: {self.name}'
+
+class Tag(models.Model):
+    name = models.CharField(max_length=40)
+
+    def __str__(self):
+        return self.name
+
+    def __unicode__(self):
+        return self.name
+
+
 class Product(models.Model):
     CATEGORY = (
         ('CAT1', 'Windows'),
@@ -25,8 +36,10 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
     category = models.CharField(max_length=20, null=True, choices=CATEGORY)
-    description = models.CharField(max_length=4000, null=True)
+    description = models.TextField(max_length=4000, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return f'Product name: {self.name}'
@@ -34,9 +47,10 @@ class Product(models.Model):
     def __unicode__(self):
         return f'Product name: {self.name}'
 
+
 class Order(models.Model):
-    # customer =
-    # product=
+    customer = models.ForeignKey(Customer,null=True, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product,null=True, on_delete=models.SET_NULL)
     STATUS = (
         ('PENDING', 'Pending'),
         ('UNDER_DELIVERY','Out in delivery'),
@@ -46,7 +60,6 @@ class Order(models.Model):
     number = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, null=True, choices=STATUS)
-
 
     def __str__(self):
         return f'Order: {self.number}'

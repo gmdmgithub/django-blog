@@ -1,4 +1,5 @@
 .vscode/
 *.xlsx
-*.sqlite3
+crm/db*
 __pycache__/
+crm/accounts/migrations/0*
