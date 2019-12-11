@@ -1,14 +1,13 @@
-import logging
-
-logger = logging.getLogger(__name__)
-
-
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .forms import OrderForm
 
 from .models import *
+
+import logging
+logger = logging.getLogger(__name__)
+
 
 # def home(request):
 #     return HttpResponse('Welcome to the home page')
@@ -16,7 +15,6 @@ from .models import *
 def home(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
-    
     total_customers = len(customers)
     total_orders = len(orders)
 
@@ -50,7 +48,12 @@ def create_order(request):
     form = OrderForm()
     
     if request.method == 'POST':
+        
         logging.info(request.POST)
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
 
     context = {'form':form}
     return render(request,'accounts/order_form.html', context)

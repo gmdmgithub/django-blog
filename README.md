@@ -297,4 +297,11 @@ def create_order(request):
 - add form `{{ form }}`
 
 
-5.
+5. take request from the page in the `views.py` and create a OrderForm from request data - this is a power
+
+```python
+if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+```
