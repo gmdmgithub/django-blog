@@ -52,7 +52,7 @@
 					<td>{{o.product.name}}</td>
 					<td>{{o.date_created}}</td>
 					<td>{{o.get_status_display}}</td>
-					<td><a href="#" class="btn btn-sm btn-outline-info">Update</a></td>
+					<td><a href="{% url 'upd_order' o.id %}" class="btn btn-sm btn-outline-info">Update</a></td>
 					<td><a href="#" class="btn btn-sm btn-outline-danger">Remove</a></td>
 				</tr>
                 {% endfor %}
