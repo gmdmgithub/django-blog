@@ -12,22 +12,20 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import logging
+from datetime import date, datetime
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-        },
-    },
-}
+
+log_file = f'.\log\\app_{date.today().isoformat()}.log'
+formatter = '%(asctime)s;%(name)s;%(message)s'
+
+logging.basicConfig(filename=log_file, level=logging.INFO,
+                    format=formatter, filemode='a')
+
+# """ ## if loging only to file uncomment
+stream_handler = logging.StreamHandler()
+stream_handler.setLevel(logging.DEBUG)
+stream_handler.setFormatter(logging.Formatter(formatter.replace(';', ':')))
+logging.getLogger().addHandler(stream_handler)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

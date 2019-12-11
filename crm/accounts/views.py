@@ -48,5 +48,9 @@ def accounts(request, pk):
 
 def create_order(request):
     form = OrderForm()
+    
+    if request.method == 'POST':
+        logging.info(request.POST)
+
     context = {'form':form}
     return render(request,'accounts/order_form.html', context)

@@ -282,7 +282,7 @@ class OrderForm(ModelForm):
 from django.forms import ModelForm
 ```
 
-3. Set form to the context
+3. Set form to the context in the `views.py`
 
 ```python
 def create_order(request):
@@ -291,7 +291,10 @@ def create_order(request):
     return render(request,'accounts/order_form.html', context)
 ```
 
-4. Go to the template and 
+4. Go to the template and: 
 
 - add token to secure the page `{% csrf_token %}`
 - add form `{{ form }}`
+
+
+5.
