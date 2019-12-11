@@ -8,16 +8,16 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="customers/">Customers</a>
+        <a class="nav-link" href="{% url 'customer' '1' %}">Customers</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="products/">Products</a>
+        <a class="nav-link" href="{% url 'products' %}">Products</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="about/">About</a>
+        <a class="nav-link" href="{% url 'contact' %}">About</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Login</a>

@@ -232,12 +232,13 @@ print(Product.objects.filter(tags__name='waterproof'))
 
 ```
 
-## Passing parameters to the url
+## URL
+
+### Passing parameters to the url
 
 1. First change the `urls.py`  -change the url pattern, type could be **str** or **int**
 
 ```python
-
 urlpatterns = [
     path('', views.home),
     path('about/', views.contact),
@@ -247,3 +248,37 @@ urlpatterns = [
 ```
 
 2. Change the `views.py` and add parameter to the function - in this case accounts
+
+
+### Dynamic URL's
+
+1. First add the name in `urls.py` like:
+
+```python
+urlpatterns = [
+    path('', views.home, name='home'),
+```
+
+2. In a template use pattern `{% url 'home' args %}` - args if any eg customer.id
+
+
+## Model Form
+
+1. Create file `forms.py` in [APP_NAME] directory - sample below, you can take all the fields from model or pass only some subset (list) to be generated
+
+```python
+from django.forms import ModelForm
+from .models import *
+class OrderForm()
+    class Meta:
+        model = Order
+        fields = '__all__' # if some list ['customer','number']
+
+```
+
+2. In the `views.py` import form
+
+```python
+from django.forms import ModelForm
+```
+

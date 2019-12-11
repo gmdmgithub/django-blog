@@ -42,3 +42,8 @@ def accounts(request, pk):
     context = {'customer':customer, 'orders':orders, 'o_l':o_l}
 
     return render(request,'accounts/customers.html', context)
+
+
+def create_order(request):
+    context = {}
+    return render(request,'accounts/order_form.html', context)
