@@ -23,5 +23,5 @@ urlpatterns = [
     path('', views.home),
     path('about/', views.contact),
     path('products/', views.products),
-    path('customers/', views.accounts),
+    path('customers/<str:pk>/', views.accounts),
 ]

@@ -6,6 +6,7 @@ import uuid
 
 class Customer(models.Model):
     """ Model representing Customer """
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
     phone = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200,unique=True)
@@ -40,7 +41,14 @@ class Product(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     tags = models.ManyToManyField(Tag)
+    
+    def cat_value(self):
+        for c in self.CATEGORY:
+            if c[0] == self.category:
+                return c[1]
 
+        return None
+    
     def __str__(self):
         return f'Product name: {self.name}'
 
@@ -60,6 +68,13 @@ class Order(models.Model):
     number = models.CharField(max_length=200)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, null=True, choices=STATUS)
+
+    def status_value(self):
+        for s in self.STATUS:
+            if s[0] == self.status:
+                return s[1]
+
+        return None
 
     def __str__(self):
         return f'Order: {self.number}'

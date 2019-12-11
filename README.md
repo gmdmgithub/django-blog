@@ -139,7 +139,7 @@ def home(request):
 {% endblock content %}
 ```
 
-4. The same way it could be included another block - create page and nclude tag
+4. The same way it could be included another block - create page and include tag
 
 ```django
 {% include "accounts/navbar.html" %}
@@ -166,7 +166,7 @@ def home(request):
 {% load static %}
 ```
 
-5. Use load from staic in the place in needed - key word is `{% static '' %}`
+5. Use load from static in the place in needed - key word is `{% static '' %}`
 
 ```python
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
@@ -192,7 +192,7 @@ MEDIA_URL = '/img/'
 
 1. Models of data are placed in the file models.py
 
-2. Define `Class`es that inherent from `django.Models` - eg
+2. Define `class`es that inherent from `django.Models` - eg
 
 ```python
 class Customer(models.Model):
@@ -212,3 +212,38 @@ from .models import Customer
 admin.site.register(Customer)
 
 ```
+6. To check the data from the shell run `$ python manage.py shell`, eg:
+
+```python
+customers = Customer.objects.all()
+order = Order.objects.first()
+print(order.customer.name)
+```
+
+7. Many-to-many relation query name and double underscore `__` and filed name
+
+```python
+
+class Product(models.Model):
+    #......
+    tags = models.ManyToManyField(Tag)
+
+print(Product.objects.filter(tags__name='waterproof'))
+
+```
+
+## Passing parameters to the url
+
+1. First change the `urls.py`  -change the url pattern, type could be **str** or **int**
+
+```python
+
+urlpatterns = [
+    path('', views.home),
+    path('about/', views.contact),
+    path('products/', views.products),
+    path('customers/<str:pk>/', views.accounts),
+]
+```
+
+2. Change the `views.py` and add parameter to the function - in this case accounts
