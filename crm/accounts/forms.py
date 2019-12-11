@@ -1,9 +1,9 @@
 from django.forms import ModelForm
 
-from .models import *
+from .models import Order
 
 
-class OrderForm():
+class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = '__all__' # if some list ['customer','number']

@@ -264,12 +264,12 @@ urlpatterns = [
 
 ## Model Form
 
-1. Create file `forms.py` in [APP_NAME] directory - sample below, you can take all the fields from model or pass only some subset (list) to be generated
+1. Create file `forms.py` in [APP_NAME] directory - sample below, you can take all the fields from model or pass only some subset (list) to be generated - remember class form has to inherit form ModelForm
 
 ```python
 from django.forms import ModelForm
 from .models import *
-class OrderForm()
+class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = '__all__' # if some list ['customer','number']
@@ -282,3 +282,16 @@ class OrderForm()
 from django.forms import ModelForm
 ```
 
+3. Set form to the context
+
+```python
+def create_order(request):
+    from = OrderForm()
+    context = {'form':form}
+    return render(request,'accounts/order_form.html', context)
+```
+
+4. Go to the template and 
+
+- add token to secure the page `{% csrf_token %}`
+- add form `{{ form }}`

@@ -6,6 +6,8 @@ logger = logging.getLogger(__name__)
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .forms import OrderForm
+
 from .models import *
 
 # def home(request):
@@ -45,5 +47,6 @@ def accounts(request, pk):
 
 
 def create_order(request):
-    context = {}
+    form = OrderForm()
+    context = {'form':form}
     return render(request,'accounts/order_form.html', context)
