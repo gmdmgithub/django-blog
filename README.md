@@ -6,7 +6,7 @@
 
 2. Install **django** - `$ pipenv install django` - next install all packages with **pipenv** to keep in Pipfile all dependencies
 
-3. Check the Django version `$ pythom -m django --version` - should the newest one (3.0 right now) 
+3. Check the Django version `$ pythom -m django --version` - should the newest one (3.0 right now)
 
 4. Check available commands `$ django-admin` and create the project `$ django-admin startproject [NAME]` - in this case NAME=crm
 
@@ -18,7 +18,7 @@
 
 - `wsgi.py` - webserver
 
-- `urls.py` - router -  list url paths
+- `urls.py` - router - list url paths
 
 - `settings.py` - the most important for configuration file - database, templates, middleware other
 
@@ -26,7 +26,7 @@
 
 1. basic command is: `$ python manage.py runserver` - be sure to be in crm sub-folder
 
-2. 
+2.
 
 ## Divide project into apps
 
@@ -124,18 +124,20 @@ def home(request):
 
 ```html
 <body>
-    {% include "accounts/navbar.html" %}
-    {% block content %}
-    {% endblock content %}
+  {% include "accounts/navbar.html" %} 
+  
+  {% block content %} 
+  
+  {% endblock content%}
 </body>
 ```
 
 3. In corresponding files extend the main template
 
 ```html
-{% extends "accounts/index.html" %}
+{% extends "accounts/index.html" %} 
 {% block content %}
-<h1>Products will be here</h1>
+    <h1>Products will be here</h1>
 {% endblock content %}
 ```
 
@@ -187,7 +189,6 @@ MEDIA_URL = '/img/'
 
 3. Create user - because of sqlite we use `$ python manage.py createsuperuser`
 
-
 ### Model concept
 
 1. Models of data are placed in the file models.py
@@ -212,6 +213,7 @@ from .models import Customer
 admin.site.register(Customer)
 
 ```
+
 6. To check the data from the shell run `$ python manage.py shell`, eg:
 
 ```python
@@ -236,7 +238,7 @@ print(Product.objects.filter(tags__name='waterproof'))
 
 ### Passing parameters to the url
 
-1. First change the `urls.py`  -change the url pattern, type could be **str** or **int**
+1. First change the `urls.py` -change the url pattern, type could be **str** or **int**
 
 ```python
 urlpatterns = [
@@ -249,7 +251,6 @@ urlpatterns = [
 
 2. Change the `views.py` and add parameter to the function - in this case accounts
 
-
 ### Dynamic URL's
 
 1. First add the name in `urls.py` like:
@@ -260,7 +261,6 @@ urlpatterns = [
 ```
 
 2. In a template use pattern `{% url 'home' args %}` - args if any eg customer.id
-
 
 ## Model Form
 
@@ -291,11 +291,10 @@ def create_order(request):
     return render(request,'accounts/order_form.html', context)
 ```
 
-4. Go to the template and: 
+4. Go to the template and:
 
 - add token to secure the page `{% csrf_token %}`
 - add form `{{ form }}`
-
 
 5. take request from the page in the `views.py` and create a OrderForm from request data - this is a power
 
