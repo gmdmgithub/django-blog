@@ -1,0 +1,28 @@
+{% extends "accounts/index.html" %}
+
+{% load static %}
+
+{% block content %}
+
+		<div class="card card-body" >
+            <form action="" class="user-orders-form" method="POST">
+                <input type="hidden" name="formset_factory" id="formset_factory">       
+                {% csrf_token %}
+                    
+                    {% for form in formset %}
+                    <div class="row">
+                    {{form}}
+                    </div>
+
+                    {% endfor %}
+                
+                <div class="bottom-buttons">
+                    <a class="btn btn-secondary" style="width: 200px; margin-right: 10px;" href="{% url 'customer' customer.id %}">Cancel</a>
+                    <input class="btn btn-primary" style="width: 200px; margin:0" type="submit" value="Create order" name="Submit">
+                </div>
+            </form>
+
+</div>
+
+<script src="{% static '/js/end.js' %}"></script>
+{% endblock content %}

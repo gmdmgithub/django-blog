@@ -304,3 +304,27 @@ if request.method == 'POST':
         if form.is_valid():
             form.save()
 ```
+
+
+### Form sets - multiple form on the page
+
+1. `views.py` import like so:
+
+```python 
+from django.forms import inlineformset_factory
+```
+
+2. Create instance of Form set, where argument are: dependent model and model to create a form set. Very useful in possibility to create a set of data to be presented in form. To query just un update add query set to remove already created.
+
+```python 
+OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10 )
+formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+```
+
+3. Change saving the form set - formset needs to be saved like so:
+
+```python
+formset = OrderFormSet(request.POST, instance=customer)
+if formset.is_valid():
+    formset.save()
+```
