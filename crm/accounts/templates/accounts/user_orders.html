@@ -8,7 +8,7 @@
             <form action="" class="user-orders-form" method="POST">
                 <input type="hidden" name="formset_factory" id="formset_factory">       
                 {% csrf_token %}
-                    
+                    {{ formset.management_form }}
                     {% for form in formset %}
                     <div class="row">
                     {{form}}

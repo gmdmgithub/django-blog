@@ -4,6 +4,8 @@ from django.forms import inlineformset_factory
 
 from .forms import OrderForm
 
+from .filters import OrderFilter
+
 from .models import *
 
 import logging
@@ -40,8 +42,12 @@ def accounts(request, pk):
     customer = Customer.objects.get(id=pk)
     orders = customer.order_set.all()
     o_l = len(orders)
-    context = {'customer':customer, 'orders':orders, 'o_l':o_l}
 
+    order_filter = OrderFilter(request.GET,queryset=orders)
+
+    orders = order_filter.qs
+
+    context = {'customer':customer, 'orders':orders, 'o_l':o_l, 'order_filter':order_filter}
     return render(request,'accounts/customers.html', context)
 
 
@@ -62,24 +68,24 @@ def create_order(request):
 def create_customer_orders(request, fk):
 
     customer = Customer.objects.get(id=fk)
-    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=5 )
-
-    # form = OrderForm(initial={'customer':customer})
-    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
-
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status', 'number'), extra=5 )
     logging.info(f'Request to create orders for customer {customer} of id: {fk}')
-    context = {'title':'Create orders for user', 
-                    'customer':customer, 
-                    'formset':formset }
 
     if request.method == 'POST':
-        
-        logging.info(request.POST)
+        # logging.info(f'save by post is provided {request}')
         formset = OrderFormSet(request.POST, instance=customer)
+        # logging.info(f'formset problem? {formset}')
         if formset.is_valid():
+            logging.info(request.POST)
             formset.save()
             return redirect(f'/customers/{customer.id}')
     
+    
+    # form = OrderForm(initial={'customer':customer})
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+    context = {'title':'Create orders for user', 
+                    'customer':customer, 
+                    'formset':formset }
     return render(request, 'accounts/user_orders.html',context)
 
 def update_order(request, pk):

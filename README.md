@@ -328,3 +328,21 @@ formset = OrderFormSet(request.POST, instance=customer)
 if formset.is_valid():
     formset.save()
 ```
+
+4. In the template iterate through the formset and add management_form tag to seperate this forms
+
+```pytho
+{{ formset.management_form }}
+{% for form in formset %}
+<div class="row">
+{{form}}
+```
+
+## Filter data
+
+1. Install django-filter `$ pip install django-filter`
+
+2. In file `settings.py` add new line in `INSTALLED_APPS` called `django_filters`
+
+3. Create file `filters.py` in main directory of app - [APP_NAME]
+
