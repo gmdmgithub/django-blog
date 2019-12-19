@@ -44,7 +44,6 @@ def accounts(request, pk):
     o_l = len(orders)
 
     order_filter = OrderFilter(request.GET,queryset=orders)
-
     orders = order_filter.qs
 
     context = {'customer':customer, 'orders':orders, 'o_l':o_l, 'order_filter':order_filter}

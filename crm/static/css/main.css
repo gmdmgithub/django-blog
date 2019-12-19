@@ -47,6 +47,19 @@ form select, input{
     display: inline;
     margin-left: 10px;
 }
+.inline-search > label,
+.inline-search > select, 
+.inline-search >input{
+    display: inline;
+    margin-left: 10px;
+}
+
+.inline-search >button{
+    display: block;
+    margin: 20px 0 0 10px;
+    width: 200px;
+    padding: 2px 10px;
+}
 
 .bottom-buttons{
     margin-top: 20px;

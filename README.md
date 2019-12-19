@@ -329,7 +329,7 @@ if formset.is_valid():
     formset.save()
 ```
 
-4. In the template iterate through the formset and add management_form tag to seperate this forms
+4. In the template iterate through the formset and add management_form tag to separate this forms
 
 ```pytho
 {{ formset.management_form }}
@@ -346,3 +346,25 @@ if formset.is_valid():
 
 3. Create file `filters.py` in main directory of app - [APP_NAME]
 
+4. In the view file `views.py` add filter and pass it to the context
+
+```python
+order_filter = OrderFilter(request.GET,queryset=orders)
+orders = order_filter.qs
+```
+
+5. In the template file add it similarly to the form
+
+```python
+{{ order_filter.form }}
+```
+
+### Filter range of dates
+
+1. First add import to the `filters.py` file:
+
+```python
+from django_filters import DateFilter
+### down in class Meta
+exclude = ['customer', 'date_created']
+```
