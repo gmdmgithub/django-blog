@@ -1,3 +1,7 @@
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 body{
     background-color: #ebeff5;
 }
@@ -61,6 +65,10 @@ form select, input{
     padding: 2px 10px;
 }
 
+.datepicker{
+  width: 200px;
+}
+
 .bottom-buttons{
     margin-top: 20px;
 }
@@ -74,7 +82,7 @@ form select, input{
     font-family: sans-serif;
     font-weight: bold;
     font-size: 16px;
-    padding: 50px;
+    padding: 50px 50px 20px 50px;
     margin-top: 50px;
   }
   
@@ -106,7 +114,7 @@ form select, input{
     color: #ffffff;
     font-size: 14px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   
   .footer .icons {
@@ -223,7 +231,7 @@ form select, input{
     .footer .footer-right {
       display: block;
       width: 100%;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
       text-align: center;
     }
     .footer .footer-center i {
