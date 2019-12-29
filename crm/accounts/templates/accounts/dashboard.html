@@ -43,6 +43,7 @@
 				<tr>
 					<th>Product</th>
 					<th>Date Orderd</th>
+					<th>Order no</th>
 					<th>Status</th>
 					<th>Update</th>
 					<th>Remove</th>
@@ -51,6 +52,7 @@
                 <tr>
 					<td>{{o.product.name}}</td>
 					<td>{{o.date_created}}</td>
+					<td>{{o.number}}</td>
 					<td>{{o.get_status_display}}</td>
 					<td><a href="{% url 'upd_order' o.id %}" class="btn btn-sm btn-outline-info">Update</a></td>
 					<td><a href="{% url 'del_order' o.id %}" class="btn btn-sm btn-outline-danger">Remove</a></td>

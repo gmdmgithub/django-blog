@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 
@@ -39,7 +39,7 @@ def products(request):
 def accounts(request, pk):
     """additional parameter is passed to the func dynamically"""
     
-    customer = Customer.objects.get(id=pk)
+    customer = get_object_or_404(Customer, id=pk)
     orders = customer.order_set.all()
     o_l = len(orders)
 

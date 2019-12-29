@@ -2,7 +2,7 @@ import django_filters
 
 from django.forms import DateInput
 
-from django_filters import DateFilter
+from django_filters import DateFilter, CharFilter
 
 from .models import *
 
@@ -22,6 +22,7 @@ class OrderFilter(django_filters.FilterSet):
                                         'class': 'datepicker',  
                                         'type':'date'}
                                     ))
+    number = CharFilter(field_name='number', lookup_expr='icontains')
     class Meta:
         model = Order
         fields = '__all__'
