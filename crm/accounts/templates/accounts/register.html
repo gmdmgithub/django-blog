@@ -1,0 +1,17 @@
+{% extends "accounts/index.html" %}
+
+{% block content %}
+
+<div class='login'>
+    <div class='login-content'>
+    
+    <h2>Register</h2>
+    <form action="" method="POST">
+                {% csrf_token %}
+                    {{form}}
+    <button type="submit" value="register">Register</button>
+    </form>
+
+    </diV>
+</diV>
+{% endblock content %}

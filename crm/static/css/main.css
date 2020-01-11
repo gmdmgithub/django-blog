@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+a, a:link, a:visited{
+  text-decoration: none!important;
+  color: inherit;
+}
+
 body{
     background-color: #ebeff5;
 }
@@ -16,7 +21,7 @@ body{
 }
 
 .container-fluid{
-    min-height: 50vh;
+    min-height: 48vh;
 }
 
 .logo-img{
@@ -221,15 +226,40 @@ form select, input{
     font-weight: normal;
     margin: 0;
   }
+
+.login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 40vh;
+  margin-top: 10px;
+}
+
+.login-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.login-content p span{
+  color: #0099ff;
+  font-style: italic;
+}
   
-  @media (max-width: 767px) {
+  @media (max-width: 900px) {
     .footer {
       font-size: 14px;
     }
     .footer .footer-left,
     .footer .footer-center,
     .footer .footer-right {
-      display: block;
+      display: flex;
+      flex-direction: column;
       width: 100%;
       margin-bottom: 20px;
       text-align: center;

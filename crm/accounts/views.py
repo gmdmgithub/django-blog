@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 
+from django.contrib.auth.forms import UserCreationForm
+
 from .forms import OrderForm
 
 from .filters import OrderFilter
@@ -30,7 +32,9 @@ def home(request):
     return render(request,'accounts/dashboard.html', context)
 
 def contact(request):
-    return HttpResponse('Contact us!')
+    # return HttpResponse('Contact us!')
+    context = {'title':'Contact us'}
+    return render(request, 'accounts/contact.html',context)
 
 def products(request):
     products = Product.objects.all()
@@ -111,3 +115,23 @@ def delete_order(request, pk):
         return redirect('/')
     context = {'item':order}
     return render(request,'accounts/delete.html', context)
+
+def login(request):
+    context = {'title':'Login page'}
+
+    return render(request,'accounts/login.html', context)
+
+
+def register(request):
+
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST) 
+        if form.is_valid():
+            form.save()
+            return redirect('/login')
+
+    form = UserCreationForm() 
+
+    
+    context = {'title':'Register page', 'form':form}
+    return render(request,'accounts/register.html', context)
