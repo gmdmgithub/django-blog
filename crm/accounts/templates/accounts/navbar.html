@@ -20,7 +20,7 @@
         <a class="nav-link" href="{% url 'contact' %}">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {% if not user.is_authenticated %}disabled{% endif %}" href="{% url 'login' %}" tabindex="-1" aria-disabled="true">Login</a>
+        <a class="nav-link" {% if user.is_authenticated %} href="{% url 'logout' %}">Logout {% else %} href="{% url 'login' %}">Login{% endif %}</a>
       </li>
     </ul>
   </div>

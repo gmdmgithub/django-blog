@@ -42,12 +42,25 @@ form label{
     margin-left: 50px;
     margin-bottom: 0px;
 }
-form select, input{
+form select, input, p, button{
     display: block;
     width:300px;
     border-radius: 2px;
     margin-left: 50px;
     margin-bottom: 10px;
+}
+
+form button{
+  background-color: #0099ff;
+  color: #333;
+  border-radius: 5px;
+  transition: ease 0.5s;
+}
+
+form button:hover{
+  background-color: #045f9c;
+  color: #ebeff5;
+
 }
 
 .user-orders-form > label,

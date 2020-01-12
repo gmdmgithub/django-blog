@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.forms import inlineformset_factory
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from .forms import OrderForm, CreateUserForm
@@ -118,19 +118,25 @@ def delete_order(request, pk):
     context = {'item':order}
     return render(request,'accounts/delete.html', context)
 
-def login(request):
+def login_user(request):
+
+    if request.user.is_authenticated:
+        return redirect('/')
 
     if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
-        form = AuthenticationForm(request.POST)
+        
         if user is not None:
+            login(request, user)
             messages.success(request,f'User successfully login {username}')
             logging.info(f'user authenticated {username}')
             return redirect('/')
         else:
             logging.error(f'Problem with login {form.error_messages}')
+            messages.error(request, 'Invalid/login password')
     
     form = AuthenticationForm() 
     context = {'title':'Login page', 'form':form}
@@ -153,3 +159,9 @@ def register(request):
     
     context = {'title':'Register page', 'form':form}
     return render(request,'accounts/register.html', context)
+
+def logout_user(request):
+
+    logout(request)
+
+    return redirect('/')

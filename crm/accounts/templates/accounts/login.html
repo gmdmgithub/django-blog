@@ -5,20 +5,20 @@
 <div class='login'>
     <div class='login-content'>
         <h2>Login</h2>
-        {% for message in messages %}
-        <div>
-        {{message}}
-        </div>
-        {% endfor %}
-        
         <form action="" method="POST">
                 {% csrf_token %}
                     {{form}}
+                    {% for message in messages %}
+                        <p id="messages">{{message}}</p>
+                    {% endfor %}
             <button type="submit" value="login">Login</button>
         </form>
-
         <p>Do not have account?<a href="{% url 'register' %}"> <span>Register</span></a></p>
+    
+    
+    
     </div>
+    
 </div>
 
 {% endblock content %}

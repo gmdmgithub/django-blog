@@ -12,6 +12,10 @@
     <button type="submit" value="register">Register</button>
     </form>
 
+    {% for message in messages %}
+        <p id="messages">{{message}}</p>
+    {% endfor %}
+
     </diV>
 </diV>
 {% endblock content %}
