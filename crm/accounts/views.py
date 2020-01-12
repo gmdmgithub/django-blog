@@ -2,9 +2,11 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 
-from .forms import OrderForm
+from .forms import OrderForm, CreateUserForm
 
 from .filters import OrderFilter
 
@@ -117,7 +119,21 @@ def delete_order(request, pk):
     return render(request,'accounts/delete.html', context)
 
 def login(request):
-    context = {'title':'Login page'}
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        form = AuthenticationForm(request.POST)
+        if user is not None:
+            messages.success(request,f'User successfully login {username}')
+            logging.info(f'user authenticated {username}')
+            return redirect('/')
+        else:
+            logging.error(f'Problem with login {form.error_messages}')
+    
+    form = AuthenticationForm() 
+    context = {'title':'Login page', 'form':form}
 
     return render(request,'accounts/login.html', context)
 
@@ -125,12 +141,14 @@ def login(request):
 def register(request):
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST) 
+        form = CreateUserForm(request.POST) 
         if form.is_valid():
             form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request,f'User successfully created for {username}')
             return redirect('/login')
 
-    form = UserCreationForm() 
+    form = CreateUserForm() 
 
     
     context = {'title':'Register page', 'form':form}

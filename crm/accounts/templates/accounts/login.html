@@ -5,6 +5,17 @@
 <div class='login'>
     <div class='login-content'>
         <h2>Login</h2>
+        {% for message in messages %}
+        <div>
+        {{message}}
+        </div>
+        {% endfor %}
+        
+        <form action="" method="POST">
+                {% csrf_token %}
+                    {{form}}
+            <button type="submit" value="login">Login</button>
+        </form>
 
         <p>Do not have account?<a href="{% url 'register' %}"> <span>Register</span></a></p>
     </div>

@@ -12,3 +12,8 @@ class OrderForm(ModelForm):
         fields = '__all__' # if some list ['customer','number']
 
 
+
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email','password1', 'password2']
