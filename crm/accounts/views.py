@@ -130,7 +130,7 @@ def delete_order(request, pk):
 def login_user(request):
 
     if request.user.is_authenticated:
-        return redirect('/')
+        return redirect(reverse_lazy('home'))
 
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
@@ -154,7 +154,9 @@ def login_user(request):
 
 
 def register(request):
-
+    if request.user.is_authenticated:
+        return redirect(reverse_lazy('home'))
+        
     if request.method == 'POST':
         form = CreateUserForm(request.POST) 
         if form.is_valid():
@@ -174,4 +176,4 @@ def logout_user(request):
 
     logout(request)
 
-    return redirect('/')
+    return redirect(reverse_lazy('home'))
