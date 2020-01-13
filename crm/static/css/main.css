@@ -4,7 +4,6 @@
 
 a, a:link, a:visited{
   text-decoration: none!important;
-  color: inherit;
 }
 
 body{
@@ -46,7 +45,7 @@ form select, input, p, button{
     display: block;
     width:300px;
     border-radius: 2px;
-    margin-left: 50px;
+    /* margin-left: 50px; */
     margin-bottom: 10px;
 }
 
@@ -55,12 +54,24 @@ form button{
   color: #333;
   border-radius: 5px;
   transition: ease 0.5s;
+  width: 80%;
+  margin: 0 10%;
+  margin-bottom: 20px;
 }
 
 form button:hover{
   background-color: #045f9c;
   color: #ebeff5;
 
+}
+
+.nav-hello-msg{
+  color: #333;
+  margin: 0 10px;
+}
+.nav-login{
+  color: #026eb6;
+  font-weight: bold;
 }
 
 .user-orders-form > label,

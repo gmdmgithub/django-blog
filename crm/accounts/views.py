@@ -1,9 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+
+from django.contrib.auth.decorators import login_required
+
 from django.contrib import messages
 
 from .forms import OrderForm, CreateUserForm
@@ -19,6 +23,7 @@ logger = logging.getLogger(__name__)
 # def home(request):
 #     return HttpResponse('Welcome to the home page')
 
+@login_required(login_url=reverse_lazy('login'))
 def home(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
@@ -38,10 +43,12 @@ def contact(request):
     context = {'title':'Contact us'}
     return render(request, 'accounts/contact.html',context)
 
+@login_required(login_url=reverse_lazy('login'))
 def products(request):
     products = Product.objects.all()
     return render(request,'accounts/products.html', {'p_list':products})
 
+@login_required(login_url=reverse_lazy('login'))
 def accounts(request, pk):
     """additional parameter is passed to the func dynamically"""
     
@@ -55,7 +62,7 @@ def accounts(request, pk):
     context = {'customer':customer, 'orders':orders, 'o_l':o_l, 'order_filter':order_filter}
     return render(request,'accounts/customers.html', context)
 
-
+@login_required(login_url=reverse_lazy('login'))
 def create_order(request):
     form = OrderForm()
     
@@ -70,6 +77,7 @@ def create_order(request):
     context = {'form':form}
     return render(request,'accounts/order_form.html', context)
 
+@login_required(login_url=reverse_lazy('login'))
 def create_customer_orders(request, fk):
 
     customer = Customer.objects.get(id=fk)
@@ -93,6 +101,7 @@ def create_customer_orders(request, fk):
                     'formset':formset }
     return render(request, 'accounts/user_orders.html',context)
 
+@login_required(login_url=reverse_lazy('login'))
 def update_order(request, pk):
     order = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
@@ -107,7 +116,7 @@ def update_order(request, pk):
     context = {'form':form}
     return render(request,'accounts/order_form.html', context)
 
-
+@login_required(login_url=reverse_lazy('login'))
 def delete_order(request, pk):
     order = Order.objects.get(id=pk)
     
@@ -160,6 +169,7 @@ def register(request):
     context = {'title':'Register page', 'form':form}
     return render(request,'accounts/register.html', context)
 
+@login_required(login_url=reverse_lazy('login'))
 def logout_user(request):
 
     logout(request)
