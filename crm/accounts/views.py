@@ -16,6 +16,8 @@ from .filters import OrderFilter
 
 from .models import *
 
+from .decorators import unauthenticated_user,restrict_view
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -24,6 +26,7 @@ logger = logging.getLogger(__name__)
 #     return HttpResponse('Welcome to the home page')
 
 @login_required(login_url=reverse_lazy('login'))
+@restrict_view(['admin'])
 def home(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
@@ -127,10 +130,10 @@ def delete_order(request, pk):
     context = {'item':order}
     return render(request,'accounts/delete.html', context)
 
-def login_user(request):
 
-    if request.user.is_authenticated:
-        return redirect(reverse_lazy('home'))
+
+@unauthenticated_user  #alternative way
+def login_user(request):  
 
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
@@ -152,7 +155,7 @@ def login_user(request):
 
     return render(request,'accounts/login.html', context)
 
-
+#@unauthenticated_user - lets leave traditional version - just for example
 def register(request):
     if request.user.is_authenticated:
         return redirect(reverse_lazy('home'))
