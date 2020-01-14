@@ -5,6 +5,7 @@ from django.forms import inlineformset_factory
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
 
 from django.contrib.auth.decorators import login_required
 
@@ -13,6 +14,7 @@ from django.contrib import messages
 from .forms import OrderForm, CreateUserForm
 
 from .filters import OrderFilter
+from django.conf import settings
 
 from .models import *
 
@@ -25,7 +27,7 @@ logger = logging.getLogger(__name__)
 # def home(request):
 #     return HttpResponse('Welcome to the home page')
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
 @restrict_view(['admin'])
 def home(request):
     customers = Customer.objects.all()
@@ -46,12 +48,14 @@ def contact(request):
     context = {'title':'Contact us'}
     return render(request, 'accounts/contact.html',context)
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
+@restrict_view(['admin'])
 def products(request):
     products = Product.objects.all()
     return render(request,'accounts/products.html', {'p_list':products})
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
+@restrict_view(['admin','users'])
 def accounts(request, pk):
     """additional parameter is passed to the func dynamically"""
     
@@ -65,7 +69,7 @@ def accounts(request, pk):
     context = {'customer':customer, 'orders':orders, 'o_l':o_l, 'order_filter':order_filter}
     return render(request,'accounts/customers.html', context)
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
 def create_order(request):
     form = OrderForm()
     
@@ -80,7 +84,7 @@ def create_order(request):
     context = {'form':form}
     return render(request,'accounts/order_form.html', context)
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
 def create_customer_orders(request, fk):
 
     customer = Customer.objects.get(id=fk)
@@ -104,7 +108,7 @@ def create_customer_orders(request, fk):
                     'formset':formset }
     return render(request, 'accounts/user_orders.html',context)
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
 def update_order(request, pk):
     order = Order.objects.get(id=pk)
     form = OrderForm(instance=order)
@@ -119,7 +123,7 @@ def update_order(request, pk):
     context = {'form':form}
     return render(request,'accounts/order_form.html', context)
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
 def delete_order(request, pk):
     order = Order.objects.get(id=pk)
     
@@ -158,13 +162,15 @@ def login_user(request):
 #@unauthenticated_user - lets leave traditional version - just for example
 def register(request):
     if request.user.is_authenticated:
-        return redirect(reverse_lazy('home'))
+        return redirect(reverse_lazy(settings.HOME_PAGE_URL))
         
     if request.method == 'POST':
         form = CreateUserForm(request.POST) 
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            user = form.save()
+            group = Group.objects.get(name='users')
+            user.groups.add(group)
+            username = user.username
             messages.success(request,f'User successfully created for {username}')
             return redirect('/login')
 
@@ -174,9 +180,9 @@ def register(request):
     context = {'title':'Register page', 'form':form}
     return render(request,'accounts/register.html', context)
 
-@login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy(settings.LOGIN_PAGE_URL))
 def logout_user(request):
 
     logout(request)
 
-    return redirect(reverse_lazy('home'))
+    return redirect(reverse_lazy(settings.HOME_PAGE_URL))

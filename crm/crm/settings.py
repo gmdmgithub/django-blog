@@ -147,3 +147,6 @@ STATICFILES_DIRS = [
 
 logging.info(f'Static dir is {STATICFILES_DIRS}')
 logging.info(f'Base dir is: {BASE_DIR}')
+
+HOME_PAGE_URL='home'
+LOGIN_PAGE_URL='login'

@@ -15,17 +15,18 @@ Including another URLconf
 """
 from django.urls import path
 from django.http import HttpResponse
+from django.conf import settings
 
 from . import views
 
 
 urlpatterns = [
     
-    path('login', views.login_user, name="login"),
+    path('login', views.login_user, name=settings.LOGIN_PAGE_URL),
     path('register', views.register, name="register"),
     path('logout', views.logout_user, name="logout"),
 
-    path('', views.home, name='home'),
+    path('', views.home, name=settings.HOME_PAGE_URL),
 
     path('about/', views.contact, name='contact'),
     path('products/', views.products, name='products'),
