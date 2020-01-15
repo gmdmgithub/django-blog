@@ -171,6 +171,11 @@ def register(request):
             group = Group.objects.get(name='users')
             user.groups.add(group)
             username = user.username
+
+            Customer.objects.create(
+                user=user,
+            )
+
             messages.success(request,f'User successfully created for {username}')
             return redirect('/login')
 

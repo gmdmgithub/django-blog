@@ -65,6 +65,16 @@ form button:hover{
 
 }
 
+.caption{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: antiquewhite;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
 .nav-hello-msg{
   color: #333;
   margin: 0 10px;
