@@ -147,7 +147,7 @@ def home(request):
 {% include "accounts/navbar.html" %}
 ```
 
-### Static files
+### Static files. Django way is to create one folder to keep everything together
 
 1. Create folder and sub-folders (up to U)
 

@@ -25,4 +25,4 @@ urlpatterns = [
     path('admin/', admin.site.urls), #d548e18d36aa11ea927d54e1adbd8177
 
     path('', include('accounts.urls')), # whenever '/' look for accounts.url
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

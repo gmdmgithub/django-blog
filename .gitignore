@@ -1,6 +1,8 @@
 .vscode/
 *.xlsx
 *.log
+*.jpg
+*.png
 crm/db*
 __pycache__/
 crm/accounts/migrations/0*

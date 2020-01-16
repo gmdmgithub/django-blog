@@ -151,5 +151,6 @@ logging.info(f'Base dir is: {BASE_DIR}')
 HOME_PAGE_URL='home'
 LOGIN_PAGE_URL='login'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/images')
-MEDIA_URL = 'images/'
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img/profile_pict')
