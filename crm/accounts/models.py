@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
+import logging
 
 import uuid
 
@@ -23,6 +24,10 @@ class Customer(models.Model):
 
     def __unicode__(self):
         return f'Customer: {self.name}'
+
+
+
+# post_save.connect(update_profile,sender=User)
 
 class Tag(models.Model):
     name = models.CharField(max_length=40)

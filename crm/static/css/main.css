@@ -5,6 +5,10 @@
 a, a:link, a:visited{
   text-decoration: none!important;
 }
+:root{
+  --dark: #131419;
+  
+}
 
 body{
     background-color: #ebeff5;
